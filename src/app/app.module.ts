@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { MatInputModule, MatFormFieldModule } from '@angular/material';
 
 
 import { AppComponent } from './app.component';
@@ -12,7 +13,9 @@ import { SearchInputComponentComponent } from './search-input-component/search-i
     SearchInputComponentComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
