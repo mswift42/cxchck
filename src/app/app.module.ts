@@ -5,17 +5,23 @@ import { MatInputModule, MatFormFieldModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { SearchInputComponentComponent } from './search-input-component/search-input-component.component';
+import { ProductCardComponent } from './product-card/product-card.component';
+import { ResultListComponent } from './result-list/result-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchInputComponentComponent
+    SearchInputComponentComponent,
+    ProductCardComponent,
+    ResultListComponent
   ],
   imports: [
     BrowserModule,
     MatInputModule,
     MatFormFieldModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
