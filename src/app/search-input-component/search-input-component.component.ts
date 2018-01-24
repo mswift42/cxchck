@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatInput, MatFormField } from '@angular/material';
 
 @Component({
   selector: 'app-search-input-component',
@@ -6,8 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-input-component.component.css'],
 })
 export class SearchInputComponentComponent implements OnInit {
+  value = '';
 
-  constructor() { }
+  searchProduct(inp) {
+    console.log(inp.target.value);
+  }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
