@@ -1,3 +1,11 @@
-<p>
-  result-list works!
-</p>
+<div class="productlist">
+  <mat-card *ngFor="let product of products" class="productclass">
+    <mat-card-header>
+      <mat-card-title>{{product.title}}</mat-card-title>
+    </mat-card-header>
+    <img class="productimage" mat-card-image src="{{product.thumbnail}}" alt="{{product.title}}"/>
+    <mat-card-content>
+      {{product.title}}
+    </mat-card-content>
+  </mat-card>
+</div>

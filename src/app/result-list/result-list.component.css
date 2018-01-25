@@ -1,0 +1,16 @@
+.productlist {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.productclass {
+  margin : 2em;
+  width: 500px;
+  max-height:400px;
+  box-sizing: border-box;
+}
+
+.productimage {
+  width: 200px;
+  height:300px;
+}
