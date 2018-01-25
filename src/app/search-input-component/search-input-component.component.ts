@@ -7,8 +7,6 @@ import {Component, OnInit} from '@angular/core';
 })
 export class SearchInputComponentComponent implements OnInit {
   value = '';
-  activeStore;
-
   storeList = [
     new Store(
       'Rose Street', '54'
@@ -17,6 +15,9 @@ export class SearchInputComponentComponent implements OnInit {
       'Cameron Toll', '3017'
     )
   ];
+
+  activeStore = this.storeList[0];
+
 
   searchProduct(inp) {
     console.log(inp.target.value);
