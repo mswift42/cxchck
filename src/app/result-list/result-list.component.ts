@@ -1,20 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../product';
-import { MockProductService } from '../mock-product.service';
 
 @Component({
   selector: 'app-result-list',
   templateUrl: './result-list.component.html',
   styleUrls: ['./result-list.component.css'],
-  providers: [MockProductService]
 })
 export class ResultListComponent implements OnInit {
-  products: Product[] = [];
+  @Input() products: Product[];
 
-  constructor(private mockProductService: MockProductService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.products = this.mockProductService.mockProducts;
   }
 
 }
