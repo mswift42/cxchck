@@ -1,9 +1,12 @@
 import {Component, OnInit} from '@angular/core';
+import {MockProductService} from '../mock-product.service';
+import {Product} from '../product';
 
 @Component({
   selector: 'app-search-input-component',
   templateUrl: './search-input-component.component.html',
   styleUrls: ['./search-input-component.component.css'],
+  providers: [MockProductService]
 })
 export class SearchInputComponentComponent implements OnInit {
   value = '';
@@ -15,6 +18,7 @@ export class SearchInputComponentComponent implements OnInit {
       'Cameron Toll', '3017'
     )
   ];
+  products: Product[];
 
   activeStore = this.storeList[0];
 
@@ -23,7 +27,8 @@ export class SearchInputComponentComponent implements OnInit {
     console.log(inp.target.value);
   }
 
-  constructor() {
+  constructor(private mockProductService: MockProductService) {
+    this.products = this.mockProductService.mockProducts;
   }
 
   ngOnInit() {
