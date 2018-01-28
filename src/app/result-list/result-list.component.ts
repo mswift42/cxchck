@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../product';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-result-list',
@@ -7,7 +8,7 @@ import { Product } from '../product';
   styleUrls: ['./result-list.component.css'],
 })
 export class ResultListComponent implements OnInit {
-  @Input() products: Product[];
+  @Input() products: Observable<Product[]>;
 
   constructor() { }
 
