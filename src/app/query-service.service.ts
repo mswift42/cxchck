@@ -1,18 +1,22 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {Product} from './product';
+import {Http} from '@angular/http';
 
 @Injectable()
 export class QueryServiceService {
-  private _products: string[] = [];
   private url(query: string, location: string): string {
     return 'http://localhost:4242/querycx?query=' + query +
       '$location=' + location;
   }
 
-  get products(): string[] {
-    return this._products
+  getProducts(query: string, location: string): Observable<Product[]> {
+    return this.http.get<Product[]>(this.url(query, location));
   }
 
-  constructor() { }
+
+  constructor(private http: HttpClient) {
+  }
 
 }
