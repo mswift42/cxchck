@@ -39,11 +39,11 @@ func parseResults(doc *goquery.Document) []*QueryResult {
 }
 
 type QueryResult struct {
-	Title       string `json:title`
-	Thumbnail   string `json:thumb`
-	Price       string `json:price`
-	Description string `json:description`
-	URL         string `json:url`
+	Title       string `json:"title"`
+	Thumbnail   string `json:"thumbnail"`
+	Price       string `json:"price"`
+	Description string `json:"description"`
+	URL         string `json:"url"`
 }
 
 func (q *QueryResult) String() string {
