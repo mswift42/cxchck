@@ -24,6 +24,7 @@ export class SearchInputComponentComponent implements OnInit {
     )
   ];
   products: Product[] = [];
+  private baseurl = 'https://uk.webuy.com';
 
   activeStore = this.storeList[0];
 
@@ -37,10 +38,10 @@ export class SearchInputComponentComponent implements OnInit {
     ).subscribe(
       (data: any) => data.forEach((i) => this.products.push(
         new Product(i['title'],
-          'https://uk.webuy.com' + i['thumbnail'],
+          this.baseurl +  i['thumbnail'],
           i['price'],
           '',
-          i['url'])
+          this.baseurl + i['url'])
       )));
 
   }
