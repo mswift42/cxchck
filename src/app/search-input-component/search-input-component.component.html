@@ -1,6 +1,7 @@
   <mat-form-field class="example-full-width" >
-    <input  matInput placeholder="Search for Product" value="{{value}}" (keyup.enter)="searchProduct($event)" >
+    <input  matInput placeholder="Search for Product" value="{{value}}" (keyup.enter)="searchProduct($event.target.value)" >
   </mat-form-field>
+  <button mat-button (click)="searchProduct(value)">Search</button>
   <mat-radio-group >
     <mat-radio-button *ngFor="let option of storeList"
                       [checked]="option == activeStore"
@@ -9,5 +10,7 @@
       {{option.name}}
     </mat-radio-button>
   </mat-radio-group>
-  <div *ngIf="noResults">Could not find any result</div>
+  <div *ngIf="noResults">
+    <p>Could not find any result!</p>
+  </div>
 <app-result-list [products]="products"></app-result-list>

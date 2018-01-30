@@ -43,13 +43,15 @@ export class SearchInputComponentComponent implements OnInit {
   }
 
   searchProduct(inp) {
-    this.products = [];
-    this.noResults = false;
-    this.queryService.getProducts(
-      inp.target.value, this.activeStore.location
-    ).subscribe(
-      (data: any) => this.setProducts(data)
-    );
+    if (inp != '') {
+      this.products = [];
+      this.noResults = false;
+      this.value = inp;
+      this.queryService.getProducts(
+        this.value, this.activeStore.location
+      ).subscribe(
+        (data: any) => this.setProducts(data)
+      );
       // (data: any) => data.forEach((i) => this.products.push(
       //   new Product(i['title'],
       //     this.baseurl +  i['thumbnail'],
@@ -59,7 +61,7 @@ export class SearchInputComponentComponent implements OnInit {
       // ),
       //   err => this.noResults = true
       // ));
-
+    }
   }
 
   constructor(private queryService: QueryServiceService) {
