@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 export class QueryServiceService {
   private url(query: string, location: string): string {
     const trimmed = query.trim().replace( ' ', ',');
-    return 'http://localhost:4242/querycx?query=' + trimmed +
+    return '/querycx?query=' + trimmed +
       '&location=' + location;
   }
 
