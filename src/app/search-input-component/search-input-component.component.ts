@@ -25,24 +25,40 @@ export class SearchInputComponentComponent implements OnInit {
   ];
   products: Product[] = [];
   private baseurl = 'https://uk.webuy.com';
+  noResults = false;
 
   activeStore = this.storeList[0];
 
-  setProducts(response: Response) {
-  }
-
-  searchProduct(inp) {
-    this.products = [];
-    this.queryService.getProducts(
-      inp.target.value, this.activeStore.location
-    ).subscribe(
-      (data: any) => data.forEach((i) => this.products.push(
+  setProducts(data: any) {
+    if (data != null) {
+      data.forEach((i) => this.products.push(
         new Product(i['title'],
           this.baseurl +  i['thumbnail'],
           i['price'],
           '',
-          this.baseurl + i['url'])
-      )));
+          this.baseurl + i['url'])));
+    } else {
+      this.noResults = true;
+    }
+  }
+
+  searchProduct(inp) {
+    this.products = [];
+    this.noResults = false;
+    this.queryService.getProducts(
+      inp.target.value, this.activeStore.location
+    ).subscribe(
+      (data: any) => this.setProducts(data)
+    );
+      // (data: any) => data.forEach((i) => this.products.push(
+      //   new Product(i['title'],
+      //     this.baseurl +  i['thumbnail'],
+      //     i['price'],
+      //     '',
+      //     this.baseurl + i['url'])
+      // ),
+      //   err => this.noResults = true
+      // ));
 
   }
 
