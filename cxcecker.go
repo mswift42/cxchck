@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/PuerkitoBio/goquery"
+	"github.com/mswift42/goquery"
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/urlfetch"
 )
@@ -15,15 +15,21 @@ func init() {
 	http.HandleFunc("/querycx", getResults)
 }
 
-func newCxDocument(resp *http.Response) (*goquery.Document, error) {
-	doc, err := goquery.NewDocumentFromResponse(resp)
-	if err != nil {
-		return nil, err
-	}
-	return doc, nil
+type Result struct {
+	Response struct {
+		Data struct {
+			Boxes []struct {
+				BoxName   string `json:"boxName"`
+				SellPrice int    `json:"sellPrice"`
+				ImageUrls struct {
+					Large string `json:"large"`
+				} `json:"imageUrls"`
+			} `json:"boxes"`
+		} `json:"data"`
+	} `json:"response"`
 }
 
-func parseResults(doc *goquery.Document) []*QueryResult {
+func parseResults(r *http.Response) []*QueryResult {
 	var results []*QueryResult
 	doc.Find(".searchRecord").Each(func(i int, s *goquery.Selection) {
 		title := s.Find("img").AttrOr("alt", "")
