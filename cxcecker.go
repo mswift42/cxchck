@@ -23,7 +23,7 @@ type Result struct {
 				BoxId     string `json:"boxId"`
 				SellPrice int    `json:"sellPrice"`
 				ImageUrls struct {
-					Large string `json:"large"`
+					Medium string `json:"masterBoxMedium"`
 				} `json:"imageUrls"`
 			} `json:"boxes"`
 		} `json:"data"`
@@ -44,7 +44,7 @@ func parseResults(r *http.Response) ([]*QueryResult, error) {
 	boxes := result.Response.Data.Boxes
 	for _, i := range boxes {
 		results = append(results, newQueryResult(i.BoxName,
-			i.ImageUrls.Large, i.SellPrice, "", i.BoxId))
+			i.ImageUrls.Medium, i.SellPrice, "", i.BoxId))
 	}
 	return results, nil
 }
