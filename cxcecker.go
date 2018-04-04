@@ -3,10 +3,9 @@ package cxcecker
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
-	"strings"
 
-	"github.com/mswift42/goquery"
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/urlfetch"
 )
@@ -20,6 +19,7 @@ type Result struct {
 		Data struct {
 			Boxes []struct {
 				BoxName   string `json:"boxName"`
+				BoxId     string `json:"boxId"`
 				SellPrice int    `json:"sellPrice"`
 				ImageUrls struct {
 					Large string `json:"large"`
@@ -29,31 +29,36 @@ type Result struct {
 	} `json:"response"`
 }
 
-func parseResults(r *http.Response) []*QueryResult {
+func parseResults(r *http.Response) ([]*QueryResult, error) {
 	var results []*QueryResult
-	doc.Find(".searchRecord").Each(func(i int, s *goquery.Selection) {
-		title := s.Find("img").AttrOr("alt", "")
-		thumb := s.Find("img").AttrOr("src", "")
-		price := strings.Replace(s.Find("div.priceTxt").First().Text(), "WeSell for", "", -1)
-		url := s.Find("a").AttrOr("href", "")
-		res := &QueryResult{title, thumb, price, "", url}
-		fmt.Println(price)
-		fmt.Println(res)
-		results = append(results, res)
-	})
-	return results
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		return nil, err
+	}
+	var result Result
+
+	if err := json.Unmarshal(body, &result); err != nil {
+		return nil, err
+	}
+	boxes := result.Response.Data.Boxes
+	for _, i := range boxes {
+		results = append(results, &QueryResult{i.BoxName,
+			i.ImageUrls.Large, i.SellPrice, "",
+			productUrl(i.BoxId)})
+	}
+	return results, nil
+}
+
+func productUrl(id string) string {
+	return "https://uk.webuy.com/product-detail?" + id
 }
 
 type QueryResult struct {
 	Title       string `json:"title"`
 	Thumbnail   string `json:"thumbnail"`
-	Price       string `json:"price"`
+	Price       int    `json:"price"`
 	Description string `json:"description"`
 	URL         string `json:"url"`
-}
-
-func (q *QueryResult) String() string {
-	return fmt.Sprintf("%s\n%s\n%s\n%s", q.Title, q.Thumbnail, q.Price, q.Description, q.URL)
 }
 
 func getResults(w http.ResponseWriter, r *http.Request) {
@@ -61,17 +66,16 @@ func getResults(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	location := r.FormValue("location")
 	query := r.FormValue("query")
-	url := "https://uk.webuy.com/search?stext=" + query + "&view=list&storeIds=" + location + "&sortBy=sellprice&sortOrder=desc"
+	url := "https://wss2.cex.uk.webuy.io/v3/boxes?q=" + query + "&storeIds=[" + location + "]" + "&firstRecord=1&count=50&sortBy=sellprice&sortOrder=desc"
 	ctx := appengine.NewContext(r)
 	client := urlfetch.Client(ctx)
-	results, err := client.Get(url)
+	resp, err := client.Get(url)
 	if err != nil {
 		fmt.Fprintf(w, err.Error(), http.StatusInternalServerError)
 	}
-	doc, err := newCxDocument(results)
+	res, err := parseResults(resp)
 	if err != nil {
 		fmt.Fprintf(w, err.Error(), http.StatusInternalServerError)
 	}
-	res := parseResults(doc)
 	json.NewEncoder(w).Encode(res)
 }
