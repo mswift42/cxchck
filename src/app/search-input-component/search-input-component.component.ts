@@ -33,10 +33,10 @@ export class SearchInputComponentComponent implements OnInit {
     if (data != null) {
       data.forEach((i) => this.products.push(
         new Product(i['title'],
-          this.baseurl +  i['thumbnail'],
+            i['thumbnail'],
           i['price'],
           '',
-          this.baseurl + i['url'])));
+          i['url'])));
     } else {
       this.noResults = true;
     }
