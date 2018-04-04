@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strings"
 
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/urlfetch"
@@ -42,15 +43,20 @@ func parseResults(r *http.Response) ([]*QueryResult, error) {
 	}
 	boxes := result.Response.Data.Boxes
 	for _, i := range boxes {
-		results = append(results, &QueryResult{i.BoxName,
-			i.ImageUrls.Large, i.SellPrice, "",
-			productUrl(i.BoxId)})
+		results = append(results, newQueryResult(i.BoxName,
+			i.ImageUrls.Large, i.SellPrice, "", i.BoxId))
 	}
 	return results, nil
 }
 
 func productUrl(id string) string {
 	return "https://uk.webuy.com/product-detail?id=" + id
+}
+
+func newQueryResult(title, thumbnail string, price int, description, url string) *QueryResult {
+	produrl := productUrl(url)
+	thumb := strings.Replace(thumbnail, " ", "", -1)
+	return &QueryResult{title, thumb, price, "", produrl}
 }
 
 type QueryResult struct {
