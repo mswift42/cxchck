@@ -50,7 +50,7 @@ func parseResults(r *http.Response) ([]*QueryResult, error) {
 }
 
 func productUrl(id string) string {
-	return "https://uk.webuy.com/product-detail?" + id
+	return "https://uk.webuy.com/product-detail?id=" + id
 }
 
 type QueryResult struct {
