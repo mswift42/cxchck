@@ -23,7 +23,7 @@ type Result struct {
 				BoxId     string `json:"boxId"`
 				SellPrice int    `json:"sellPrice"`
 				ImageUrls struct {
-					Medium string `json:"medium"`
+					Medium string `json:"large"`
 				} `json:"imageUrls"`
 			} `json:"boxes"`
 		} `json:"data"`
