@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cxsearch.component.css']
 })
 export class CxsearchComponent implements OnInit {
-
+  value = '';
   constructor() { }
 
   ngOnInit() {
+  }
+  searchProduct(inp) {
+    console.log(inp.value);
+    this.value = inp.value;
   }
 
 }

@@ -1,3 +1,5 @@
-<p>
-  cxsearch works!
-</p>
+<mat-form-field>
+  <input matInput type="text" placeholder="search for product" value="{{value}}"
+         (keyup.enter)="searchProduct($event.target)" >
+</mat-form-field>
+<span>{{value}}</span>
