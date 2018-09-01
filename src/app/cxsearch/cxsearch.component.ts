@@ -12,8 +12,8 @@ export class CxsearchComponent implements OnInit {
   ngOnInit() {
   }
   searchProduct(inp) {
-    console.log(inp.value);
-    this.value = inp.value;
+    console.log(inp);
+    this.value = inp;
   }
 
 }

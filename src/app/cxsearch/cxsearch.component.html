@@ -1,5 +1,10 @@
 <mat-form-field>
+  <div>
   <input matInput type="text" placeholder="search for product" value="{{value}}"
-         (keyup.enter)="searchProduct($event.target)" >
+         (keyup.enter)="searchProduct($event.target.value)" >
+  </div>
 </mat-form-field>
+<div>
+  <button mat-raised-button (click)="searchProduct(value)">Search</button>
+</div>
 <span>{{value}}</span>
