@@ -5,7 +5,8 @@ import { AppComponent } from './app.component';
 import { CxsearchComponent } from './cxsearch/cxsearch.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule, MatButtonModule, MatFormFieldModule,
-  MatToolbarModule} from '@angular/material';
+  MatToolbarModule, MatRadioModule} from '@angular/material';
+import { FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,8 @@ import { MatInputModule, MatButtonModule, MatFormFieldModule,
     MatButtonModule,
     MatFormFieldModule,
     MatToolbarModule,
+    MatRadioModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
