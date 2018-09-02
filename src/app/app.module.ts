@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule, MatButtonModule, MatFormFieldModule,
   MatToolbarModule, MatRadioModule} from '@angular/material';
 import { FormsModule} from '@angular/forms';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,8 +23,9 @@ import { FormsModule} from '@angular/forms';
     MatToolbarModule,
     MatRadioModule,
     FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [HttpClientModule, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

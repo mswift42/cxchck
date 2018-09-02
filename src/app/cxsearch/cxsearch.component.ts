@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {SearchService} from '../search.service';
+import {Product} from '../product';
 
 @Component({
   selector: 'app-cxsearch',
@@ -13,13 +15,26 @@ export class CxsearchComponent implements OnInit {
   CxsearchComponent.Cameron_Toll, CxsearchComponent.Leith];
   value = '';
   activeStore = CxsearchComponent.Rose_Street;
-  constructor() { }
+  products: Product[] = [];
+  constructor(private searchService: SearchService) { }
 
   ngOnInit() {
   }
   searchProduct(inp) {
-    console.log(inp);
     this.value = inp;
+    console.log(this.value);
+    this.searchService.getProducts(
+      inp, this.activeStore
+    ).subscribe(
+      (data: Product[]) => data.forEach((i) =>
+        this.products.push(
+        new Product(i['title'],
+          'https://uk.webuy.com' + i['thumbnail'],
+        i['price'],
+       '',
+        i['url'])))
+    );
+    console.log(this.products);
   }
 
 }
