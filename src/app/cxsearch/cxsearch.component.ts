@@ -6,7 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cxsearch.component.css']
 })
 export class CxsearchComponent implements OnInit {
+  static readonly RoseStreet = '54';
+  static readonly CameronToll = '3017';
+  static readonly Leith = '3115';
   value = '';
+  activeStore = CxsearchComponent.RoseStreet;
   constructor() { }
 
   ngOnInit() {

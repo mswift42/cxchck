@@ -9,5 +9,6 @@ export class SearchService {
     return `http://localhost:4242/querycx?query=${query}&location=${location}`;
   }
 
+
   constructor() { }
 }
