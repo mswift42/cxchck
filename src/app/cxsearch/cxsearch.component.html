@@ -5,9 +5,12 @@
   </div>
 </mat-form-field>
 <mat-radio-group [(ngModel)]="activeStore">
-  <mat-radio-button *ngFor="let store of Stores" [value]="store"></mat-radio-button>
+  <mat-radio-button *ngFor="let store of Stores" [value]="store">{{ store }}</mat-radio-button>
 </mat-radio-group>
 <div>
   <button mat-raised-button (click)="searchProduct(value)">Search</button>
 </div>
 <span>{{value}}</span>
+<div *ngFor="let prod of products">
+  <app-product-card [product]="prod"></app-product-card>
+</div>

@@ -23,8 +23,9 @@ export class CxsearchComponent implements OnInit {
   searchProduct(inp) {
     this.value = inp;
     console.log(this.value);
+    this.products = [];
     this.searchService.getProducts(
-      inp, this.activeStore
+      this.value, this.activeStore
     ).subscribe(
       (data: Product[]) => data.forEach((i) =>
         this.products.push(

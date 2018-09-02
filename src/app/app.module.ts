@@ -5,14 +5,16 @@ import { AppComponent } from './app.component';
 import { CxsearchComponent } from './cxsearch/cxsearch.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule, MatButtonModule, MatFormFieldModule,
-  MatToolbarModule, MatRadioModule} from '@angular/material';
+  MatToolbarModule, MatRadioModule, MatCardModule} from '@angular/material';
 import { FormsModule} from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CxsearchComponent
+    CxsearchComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,
@@ -24,6 +26,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     MatRadioModule,
     FormsModule,
     HttpClientModule,
+    MatCardModule,
   ],
   providers: [HttpClientModule, HttpClient],
   bootstrap: [AppComponent]
