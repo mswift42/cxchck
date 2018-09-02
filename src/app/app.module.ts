@@ -9,6 +9,7 @@ import { MatInputModule, MatButtonModule, MatFormFieldModule,
 import { FormsModule} from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
     FormsModule,
     HttpClientModule,
     MatCardModule,
+    FlexLayoutModule,
   ],
   providers: [HttpClientModule, HttpClient],
   bootstrap: [AppComponent]

@@ -1,3 +1,16 @@
-<p *ngIf="product">
-  {{product.title}}
-</p>
+<div>
+<mat-card *ngIf="product" class="prod-card">
+  <mat-card-header>
+    <mat-card-title>
+      {{product.title}}
+    </mat-card-title>
+    <mat-card-subtitle>{{product.price}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <a href="{{product.url}}">
+      <img src="{{product.thumbnail}}" alt="{{product.title}}">
+    </a>
+    <p>{{product.description}}</p>
+  </mat-card-content>
+</mat-card>
+</div>

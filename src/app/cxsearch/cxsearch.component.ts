@@ -30,7 +30,7 @@ export class CxsearchComponent implements OnInit {
       (data: Product[]) => data.forEach((i) =>
         this.products.push(
         new Product(i['title'],
-          'https://uk.webuy.com' + i['thumbnail'],
+            i['thumbnail'],
         i['price'],
        '',
         i['url'])))
