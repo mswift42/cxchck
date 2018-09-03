@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SearchService} from '../search.service';
 import {Product} from '../product';
+import {Store} from '../store';
 
 @Component({
   selector: 'app-cxsearch',
@@ -8,13 +9,11 @@ import {Product} from '../product';
   styleUrls: ['./cxsearch.component.css']
 })
 export class CxsearchComponent implements OnInit {
-  static readonly Rose_Street = '54';
-  static readonly Cameron_Toll = '3017';
-  static readonly Leith = '3115';
-  Stores = [CxsearchComponent.Rose_Street,
-  CxsearchComponent.Cameron_Toll, CxsearchComponent.Leith];
+  Stores = [new Store('Rose Street', '54'),
+  new Store('Cameron Toll', '3017'),
+  new Store('Leith', '3115')];
   value = '';
-  activeStore = CxsearchComponent.Rose_Street;
+  activeStore = this.Stores[0];
   products: Product[] = [];
   constructor(private searchService: SearchService) { }
 
@@ -22,10 +21,9 @@ export class CxsearchComponent implements OnInit {
   }
   searchProduct(inp) {
     this.value = inp;
-    console.log(this.value);
     this.products = [];
     this.searchService.getProducts(
-      this.value, this.activeStore
+      this.value, this.activeStore.id
     ).subscribe(
       (data: Product[]) => data.forEach((i) =>
         this.products.push(
@@ -35,7 +33,6 @@ export class CxsearchComponent implements OnInit {
        '',
         i['url'])))
     );
-    console.log(this.products);
   }
 
 }
