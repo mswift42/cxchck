@@ -8,7 +8,7 @@ import {map} from 'rxjs/operators';
 })
 export class SearchService {
   private url(query: string, location: string): string {
-    return `http://localhost:8080/querycx?query=${query}&location=${location}`;
+    return `https://cxchecker.appspot.com/querycx?query=${query}&location=${location}`;
   }
 
   getProducts(query: string, location: string): Observable<any> {
