@@ -28,6 +28,7 @@ export class CxsearchComponent implements OnInit {
     ).subscribe(
       (data: Product[]) => {
         if (data != null) {
+          this.noResults = false;
         data.forEach((i) =>
           this.products.push(
             new Product(i['title'],
