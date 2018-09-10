@@ -15,6 +15,7 @@ export class CxsearchComponent implements OnInit {
   value = '';
   activeStore = this.Stores[0];
   products: Product[] = [];
+  noResults = false;
   constructor(private searchService: SearchService) { }
 
   ngOnInit() {
@@ -25,13 +26,19 @@ export class CxsearchComponent implements OnInit {
     this.searchService.getProducts(
       this.value, this.activeStore.id
     ).subscribe(
-      (data: Product[]) => data.forEach((i) =>
-        this.products.push(
-        new Product(i['title'],
-            i['thumbnail'],
-        i['price'],
-       '',
-        i['url'])))
+      (data: Product[]) => {
+        if (data != null) {
+        data.forEach((i) =>
+          this.products.push(
+            new Product(i['title'],
+              i['thumbnail'],
+              i['price'],
+              '',
+              i['url'])));
+      } else {
+        this.noResults = true;
+        }
+      }
     );
   }
 
